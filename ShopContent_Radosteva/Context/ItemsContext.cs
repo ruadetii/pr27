@@ -30,7 +30,7 @@ namespace ShopContent_Radosteva.Context
                     Price = dataItems.GetDouble(2),
                     Description = dataItems.GetString(3),
                     Category = dataItems.IsDBNull(4) ?
-                        null :
+                        new Categorys() :
                         allCategorys.Where(x => x.Id == dataItems.GetInt32(4)).First()
                 });
             }
@@ -98,7 +98,13 @@ namespace ShopContent_Radosteva.Context
             {
                 return new RelayCommand(obj =>
                 {
-                    Category = CategorysContext.AllCategorys().Where(x => x.Id == this.Category.Id).First();
+                    CategorysContext category = CategorysContext.AllCategorys().Where(x => x.Id == this.Category.Id).FirstOrDefault();
+                    if (category == null)
+                    {
+                        System.Windows.MessageBox.Show("Выберите категорию");
+                        return;
+                    }
+                    Category = category;
                     Save();
                 });
             }

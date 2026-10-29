@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ShopContent_Radosteva.ViewModell;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +24,7 @@ namespace ShopContent_Radosteva.View
         public Main()
         {
             InitializeComponent();
+            DataContext = new VMItems();
         }
     }
 }
